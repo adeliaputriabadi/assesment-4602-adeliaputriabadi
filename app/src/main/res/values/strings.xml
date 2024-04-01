@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Assesment Mobpro</string>
+    <string name="app_name">Kalkulator Diskon</string>
+    <string name="kalkulator_intro">Kalkulator Diskon merupakan cara untuk mengetahui berapa diskon yang diperoleh dan berapa harga yang harus dibayar oleh customer. Cobalah sekarang!</string>
+    <string name="harga_awal">Harga Awal</string>
+    <string name="persentase_diskon">Persentase Diskon</string>
+    <string name="harga_diskon">Harga Diskon</string>
+    <string name="total_bayar">Total Bayar</string>
+    <string name="hitung">Hitung</string>
+    <string name="reset">Reset</string>
 </resources>
