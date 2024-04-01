@@ -1,4 +1,10 @@
-package org.d3if3111.assesmentmobpro
+package org.d3if3111.assesmentmobpro.ui.screen
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.unit.dp
+import org.d3if3111.assesmentmobpro.R
+
+
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -17,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import org.d3if3111.assesmentmobpro.ui.screen.MainScreen
 import org.d3if3111.assesmentmobpro.ui.theme.AssesmentMobproTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(content: @Composable (Modifier) -> Unit) {
+fun MainScreen() {
     Scaffold(
         topBar = {
             TopAppBar (
@@ -53,26 +58,28 @@ fun MainScreen(content: @Composable (Modifier) -> Unit) {
             )
         }
     ) { padding ->
-        content(Modifier.padding(padding))
-
+        ScreenContent(Modifier.padding(padding))
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    MainScreen { modifier ->
-        Text(
-            text = "Hello $name",
-            modifier = modifier
-            )
+fun ScreenContent(modifier: Modifier) {
+    Column (
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun ScreenPreview() {
     AssesmentMobproTheme {
-        Greeting("Android")
+        MainScreen()
     }
 }
