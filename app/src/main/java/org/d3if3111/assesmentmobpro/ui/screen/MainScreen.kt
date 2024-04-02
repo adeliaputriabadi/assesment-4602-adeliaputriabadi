@@ -232,7 +232,8 @@ fun ScreenContent(modifier: Modifier) {
                 )
             },
             modifier = Modifier.padding(top = 8.dp),
-            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF58A399))
         ) {
             Text(text = stringResource(R.string.bagikan))
         }
