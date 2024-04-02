@@ -7,4 +7,7 @@
     <string name="total_bayar">Total Bayar</string>
     <string name="hitung">Hitung</string>
     <string name="reset">Reset</string>
+    <string name="input_invalid">Tidak boleh kosong.</string>
+    <string name="rumus_total">Total : Rp. %1$.2f</string>
+
 </resources>
