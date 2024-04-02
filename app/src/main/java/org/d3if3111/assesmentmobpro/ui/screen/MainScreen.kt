@@ -35,7 +35,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -90,11 +89,11 @@ fun MainScreen(navController : NavHostController) {
 
 @Composable
 fun ScreenContent(modifier: Modifier) {
-    var hargaAwal by remember { mutableStateOf("") }
-    var hargaAwalError by remember { mutableStateOf(false) }
+    var hargaAwal by rememberSaveable { mutableStateOf("") }
+    var hargaAwalError by rememberSaveable { mutableStateOf(false) }
 
-    var persentaseDiskon by remember { mutableStateOf("") }
-    var persentaseDiskonError by remember { mutableStateOf(false) }
+    var persentaseDiskon by rememberSaveable { mutableStateOf("") }
+    var persentaseDiskonError by rememberSaveable { mutableStateOf(false) }
 
 
     val radioOptions = listOf(
@@ -106,7 +105,7 @@ fun ScreenContent(modifier: Modifier) {
     var harga by rememberSaveable { mutableFloatStateOf(0f) }
 
 
-    var kategori by remember { mutableStateOf(radioOptions[0]) }
+    var kategori by rememberSaveable { mutableStateOf(radioOptions[0]) }
     Column(
         modifier = modifier
             .fillMaxSize()
