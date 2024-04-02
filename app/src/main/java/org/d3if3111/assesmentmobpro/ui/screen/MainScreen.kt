@@ -1,6 +1,8 @@
 package org.d3if3111.assesmentmobpro.ui.screen
 
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -40,6 +42,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
@@ -103,8 +106,9 @@ fun ScreenContent(modifier: Modifier) {
         )
 
     var harga by rememberSaveable { mutableFloatStateOf(0f) }
+    //var diskon by rememberSaveable { mutableFloatStateOf(0f) }
 
-
+    val context = LocalContext.current
     var kategori by rememberSaveable { mutableStateOf(radioOptions[0]) }
     Column(
         modifier = modifier
@@ -215,8 +219,25 @@ fun ScreenContent(modifier: Modifier) {
 
            Text(text = stringResource(id = R.string.rumus_total, harga))
         }
+        Button(
+            onClick = {
+                shareData(
+                    context = context,
+                    message = if (kategori == radioOptions[0]) {
+                        context.getString(R.string.bagikan_template1, hargaAwal, persentaseDiskon, harga)
+                    }else {
+                        context.getString(R.string.bagikan_template2, hargaAwal, persentaseDiskon, harga)
+                        }
 
+                )
+            },
+            modifier = Modifier.padding(top = 8.dp),
+            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+        ) {
+            Text(text = stringResource(R.string.bagikan))
+        }
     }
+
 
 }
 
@@ -246,6 +267,16 @@ private fun hitungRumus(hargaAwal: Float, persentaseDiskon: Float, isDiskon:Bool
     }
     else {
         hargaAwal - (hargaAwal * (persentaseDiskon /100))
+    }
+}
+
+private fun shareData(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT,message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
     }
 }
 

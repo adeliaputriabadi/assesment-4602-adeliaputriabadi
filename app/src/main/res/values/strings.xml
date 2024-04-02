@@ -12,4 +12,7 @@
     <string name="tentang_aplikasi">Tentang Aplikasi</string>
     <string name="copyright">Kalkulator Diskon merupakan cara untuk mengetahui berapa diskon yang diperoleh dan berapa harga yang harus dibayar oleh customer.\n\nAplikasi ini dibuat untuk Assesment 1 Mobpro. \n\nCopyright © 2021 – 2024 Adelia Putri Abadi. \nAll rights reserved.</string>
     <string name="kembali">Kembali</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="bagikan_template1">Harga Awal: Rp %1$s \nPersentase Diskon: %2$s \nTotal Diskon: %3$.2f </string>
+    <string name="bagikan_template2">Harga Awal: Rp %1$s \nPersentase Diskon: %2$s \nTotal yang harus dibayar: %3$.2f </string>
 </resources>

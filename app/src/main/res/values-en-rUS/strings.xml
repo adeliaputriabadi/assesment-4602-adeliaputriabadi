@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Discount Calculator</string>
+    <string name="bagikan_template2">Starting Price: Rp %1$s Discount Percentage: %2$s Total payable: %3$.2f</string>
+    <string name="harga_awal">Starting Price</string>
+    <string name="persentase_diskon">Discount Percentage</string>
+    <string name="harga_diskon">Discount Price</string>
+    <string name="total_bayar">Total payment</string>
+    <string name="hitung">Count</string>
+    <string name="reset">Reset</string>
+    <string name="input_invalid">Can not be empty.</string>
+    <string name="rumus_total">Total: Rp. %1$.2f</string>
+    <string name="tentang_aplikasi">About Application</string>
+    <string name="copyright">The Discount Calculator is a way to find out how much discount you get and how much the customer has to pay.  This application was created for Assessment 1 Mobpro.  Copyright © 2021 – 2024 Adelia Putri Abadi. All rights reserved.</string>
+    <string name="kembali">Back</string>
+    <string name="bagikan">Share</string>
+    <string name="bagikan_template1">Starting Price: Rp %1$s Discount Percentage: %2$s Total Discount: %3$.2f</string>
+    <string name="kalkulator_intro">The Discount Calculator is a way to find out how much discount you get and how much the customer has to pay. Try it now!</string>
+</resources>
