@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import org.d3if3111.assesmentmobpro.ui.screen.MainScreen
+import org.d3if3111.assesmentmobpro.navigation.SetupNavGraph
 import org.d3if3111.assesmentmobpro.ui.theme.AssesmentMobproTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    SetupNavGraph()
                 }
             }
         }
