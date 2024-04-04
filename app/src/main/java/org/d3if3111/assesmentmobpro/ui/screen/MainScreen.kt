@@ -217,26 +217,27 @@ fun ScreenContent(modifier: Modifier) {
             )
 
 
-           Text(text = stringResource(id = R.string.rumus_total, harga))
-        }
-        Button(
-            onClick = {
-                shareData(
-                    context = context,
-                    message = if (kategori == radioOptions[0]) {
-                        context.getString(R.string.bagikan_template1, hargaAwal, persentaseDiskon, harga)
-                    }else {
-                        context.getString(R.string.bagikan_template2, hargaAwal, persentaseDiskon, harga)
+            Text(text = stringResource(id = R.string.rumus_total, harga))
+            Button(
+                onClick = {
+                    shareData(
+                        context = context,
+                        message = if (kategori == radioOptions[0]) {
+                            context.getString(R.string.bagikan_template1, hargaAwal, persentaseDiskon, harga)
+                        }else {
+                            context.getString(R.string.bagikan_template2, hargaAwal, persentaseDiskon, harga)
                         }
 
-                )
-            },
-            modifier = Modifier.padding(top = 8.dp),
-            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF58A399))
-        ) {
-            Text(text = stringResource(R.string.bagikan))
+                    )
+                },
+                modifier = Modifier.padding(top = 8.dp),
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF58A399))
+            ) {
+                Text(text = stringResource(R.string.bagikan))
+            }
         }
+
     }
 
 

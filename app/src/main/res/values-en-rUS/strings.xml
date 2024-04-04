@@ -16,4 +16,5 @@
     <string name="bagikan">Share</string>
     <string name="bagikan_template1">Starting Price: Rp %1$s Discount Percentage: %2$s Total Discount: %3$.2f</string>
     <string name="kalkulator_intro">The Discount Calculator is a way to find out how much discount you get and how much the customer has to pay. Try it now!</string>
+    <string name="gambar">Image%1$s</string>
 </resources>

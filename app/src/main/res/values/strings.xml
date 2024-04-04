@@ -15,4 +15,5 @@
     <string name="bagikan">Bagikan</string>
     <string name="bagikan_template1">Harga Awal: Rp %1$s \nPersentase Diskon: %2$s \nTotal Diskon: %3$.2f </string>
     <string name="bagikan_template2">Harga Awal: Rp %1$s \nPersentase Diskon: %2$s \nTotal yang harus dibayar: %3$.2f </string>
+    <string name="gambar">Gambar%1$s</string>
 </resources>
