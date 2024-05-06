@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3111.assesmentmobpro.R
@@ -49,11 +50,18 @@ const val KEY_ID_UANG = "idUang"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, id: Long? = null) {
+    val viewModel: DetailViewModel = viewModel()
+
     var keterangan by remember { mutableStateOf("") }
     var nominal by remember { mutableStateOf("") }
     var selectedKategori by remember { mutableStateOf("Pendapatan") }
 
-
+    if (id!= null) {
+        val Uang = viewModel.getUang(id)
+        keterangan = Uang?.keterangan ?: ""
+        nominal = Uang?.nominal ?: ""
+        selectedKategori = Uang?.kategori ?: ""
+    }
 
 
     Scaffold (
