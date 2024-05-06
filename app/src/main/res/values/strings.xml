@@ -4,4 +4,6 @@
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_list">Tambah List</string>
     <string name="tambah_error">Belum bisa tambah list.</string>
+    <string name="keterangan">Keterangan</string>
+    <string name="nominal">Nominal</string>
 </resources>
