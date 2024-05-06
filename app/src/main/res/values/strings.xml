@@ -2,12 +2,13 @@
     <string name="app_name">Assesment Mobpro</string>
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
-    <string name="tambah_list">Tambah List</string>
+    <string name="tambah_list">Tambah List Keuangan</string>
 
     <string name="keterangan">Keterangan</string>
     <string name="nominal">Nominal</string>
     <string name="kembali">Kembali</string>
     <string name="simpan">Simpan</string>
+    <string name="edit">Edit List Keuangan</string>
     <string name="kategori_1">Pendapatan</string>
     <string name="kategori_2">Pengeluaran</string>
 </resources>

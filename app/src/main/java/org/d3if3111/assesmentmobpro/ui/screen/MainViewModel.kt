@@ -35,14 +35,14 @@ class MainViewModel : ViewModel() {
         )
         val kategori = arrayOf(
             "Pengeluaran",
-            "Penghasilan",
+            "Pendapatan",
             "Pengeluaran",
-            "Penghasilan",
+            "Pendapatan",
             "Pengeluaran",
             "Pengeluaran",
-            "Penghasilan",
+            "Pendapatan",
             "Pengeluaran",
-            "Penghasilan",
+            "Pendapatan",
             "Pengeluaran"
         )
         val data = mutableListOf<Uang>()
