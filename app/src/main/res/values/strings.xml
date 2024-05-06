@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Assesment Mobpro</string>
+    <string name="list_kosong">Belum ada data</string>
+    <string name="x_diklik">%1$s diklik!</string>
+    <string name="tambah_list">Tambah List</string>
+    <string name="tambah_error">Belum bisa tambah list.</string>
 </resources>
