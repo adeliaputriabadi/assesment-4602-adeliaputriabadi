@@ -43,22 +43,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import org.d3if3111.assesmentmobpro.model.Uang
 import org.d3if3111.assesmentmobpro.ui.theme.AssesmentMobproTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AssesmentMobproTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MainScreen()
-                }
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
