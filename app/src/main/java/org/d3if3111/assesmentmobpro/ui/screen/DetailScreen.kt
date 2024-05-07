@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -63,12 +64,13 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var nominal by remember { mutableStateOf("") }
     var selectedKategori by remember { mutableStateOf("Pendapatan") }
 
-//    if (id!= null) {
-//        val Uang = viewModel.getUang(id)
-//        keterangan = Uang?.keterangan ?: ""
-//        nominal = Uang?.nominal ?: ""
-//        selectedKategori = Uang?.kategori ?: ""
-//    }
+    LaunchedEffect(true) {
+        if (id == null) return@LaunchedEffect
+        val Uang = viewModel.getUang(id) ?: return@LaunchedEffect
+        keterangan = Uang.keterangan
+        nominal = Uang.nominal
+        selectedKategori = Uang.kategori
+    }
 
 
     Scaffold (
@@ -102,6 +104,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
 
                         if (id == null) {
                             viewModel.insert(keterangan, nominal, selectedKategori)
+                        } else {
+                            viewModel.update(id, keterangan, nominal, selectedKategori)
                         }
                         navController.popBackStack() }) {
                         Icon(

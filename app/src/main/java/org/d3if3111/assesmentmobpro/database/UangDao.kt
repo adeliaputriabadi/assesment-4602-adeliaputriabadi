@@ -18,4 +18,7 @@ interface UangDao {
 
     @Query("SELECT * FROM uang ORDER BY tanggal DESC")
     fun getUang(): Flow<List<Uang>>
+
+    @Query("SELECT * FROM uang WHERE id = :id")
+    suspend fun getUangById(id: Long): Uang?
 }

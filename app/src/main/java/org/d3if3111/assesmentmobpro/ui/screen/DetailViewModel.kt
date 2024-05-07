@@ -26,4 +26,21 @@ class DetailViewModel(private val dao: UangDao) : ViewModel() {
             dao.insert(uang)
         }
     }
+    suspend fun getUang(id: Long): Uang? {
+        return dao.getUangById(id)
+    }
+
+    fun update(id: Long, title: String, rupiah: String, selectedKategori: String) {
+        val uang = Uang(
+            id = id,
+            tanggal = formatter.format(Date()),
+            keterangan = title,
+            nominal = rupiah,
+            kategori = selectedKategori
+        )
+
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.update(uang)
+        }
+    }
 }
