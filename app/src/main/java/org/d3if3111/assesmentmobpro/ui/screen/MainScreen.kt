@@ -23,8 +23,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -34,9 +37,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import org.d3if3111.assesmentmobpro.R
+import org.d3if3111.assesmentmobpro.database.UangDb
 import org.d3if3111.assesmentmobpro.model.Uang
 import org.d3if3111.assesmentmobpro.navigation.Screen
 import org.d3if3111.assesmentmobpro.ui.theme.AssesmentMobproTheme
+import org.d3if3111.assesmentmobpro.util.ViewModelFactory
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,8 +81,11 @@ fun MainScreen(navController: NavHostController) {
 
 @Composable
 fun ScreenContent(modifier: Modifier, navController: NavHostController) {
-    val viewModel: MainViewModel = viewModel()
-   val data = viewModel.data
+   val context = LocalContext.current
+    val db = UangDb.getInstance(context)
+    val factory = ViewModelFactory(db.dao)
+    val viewModel: MainViewModel = viewModel(factory = factory)
+    val data by viewModel.data.collectAsState()
    // val data = emptyList<Uang>()
    // val context = LocalContext.current
     
@@ -130,7 +138,9 @@ fun ListItem(uang: Uang, onClick: () -> Unit) {
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-        Text(text = uang.kategori)
+        Text(text = uang.kategori
+        )
+        Text(text = uang.tanggal)
     }
 }
 

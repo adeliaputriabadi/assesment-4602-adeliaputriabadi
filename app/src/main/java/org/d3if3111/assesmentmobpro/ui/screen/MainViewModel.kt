@@ -1,61 +1,18 @@
 package org.d3if3111.assesmentmobpro.ui.screen
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import org.d3if3111.assesmentmobpro.database.UangDao
 import org.d3if3111.assesmentmobpro.model.Uang
 
-class MainViewModel : ViewModel() {
+class MainViewModel(dao: UangDao) : ViewModel() {
 
-    val data = getDataDummy()
-    private fun getDataDummy(): List<Uang> {
-        val keterangan = arrayOf(
-            "Beli Kuota",
-            "Penghasilan dari tiktok",
-            "Beli makan",
-            "Pendapatan penjualan shopee",
-            "Beli baju",
-            "Beli Kuota",
-            "Penghasilan dari tiktok",
-            "Beli makan",
-            "Pendapatan penjualan shopee",
-            "Beli baju"
-
-        )
-        val nominal = arrayOf(
-            "30000",
-            "1000000",
-            "20000",
-            "500000",
-            "300000",
-            "30000",
-            "1000000",
-            "20000",
-            "500000",
-            "300000",
-
-        )
-        val kategori = arrayOf(
-            "Pengeluaran",
-            "Pendapatan",
-            "Pengeluaran",
-            "Pendapatan",
-            "Pengeluaran",
-            "Pengeluaran",
-            "Pendapatan",
-            "Pengeluaran",
-            "Pendapatan",
-            "Pengeluaran"
-        )
-        val data = mutableListOf<Uang>()
-        for (i in keterangan.indices) {
-            data.add(
-                Uang(
-                    (i + 1).toLong(),
-                    keterangan[i],
-                    nominal[i],
-                    kategori[i]
-                )
-            )
-        }
-        return data
-    }
+    val data: StateFlow<List<Uang>> = dao.getUang().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000L),
+        initialValue = emptyList()
+    )
 }
