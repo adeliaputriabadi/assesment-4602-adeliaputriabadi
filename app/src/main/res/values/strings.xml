@@ -15,6 +15,8 @@
     <string name="pesan_hapus">Hapus list ini?</string>
     <string name="tombol_hapus">Hapus</string>
     <string name="tombol_batal">Batal</string>
+    <string name="list">Tampilan list</string>
+    <string name="grid">Tampilan grid</string>
     <string name="kategori_1">Pendapatan</string>
     <string name="kategori_2">Pengeluaran</string>
 </resources>
