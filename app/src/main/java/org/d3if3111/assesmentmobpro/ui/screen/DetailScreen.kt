@@ -67,6 +67,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var nominal by remember { mutableStateOf("") }
     var selectedKategori by remember { mutableStateOf("Pendapatan") }
 
+    var showDialog by remember { mutableStateOf(false) }
+
     LaunchedEffect(true) {
         if (id == null) return@LaunchedEffect
         val Uang = viewModel.getUang(id) ?: return@LaunchedEffect
@@ -120,9 +122,14 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                     }
 
                     if (id != null) {
-                        DeleteAction {
+                        DeleteAction { showDialog = true}
+                        DisplayAlertDialog(
+                            openDialog = showDialog,
+                            onDismissRequest = { showDialog = false }) {
+                            showDialog = false
                             viewModel.delete(id)
                             navController.popBackStack()
+                            
                         }
                     }
                 }
