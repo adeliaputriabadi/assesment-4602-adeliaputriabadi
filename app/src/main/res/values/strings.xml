@@ -10,6 +10,8 @@
     <string name="simpan">Simpan</string>
     <string name="edit">Edit List Keuangan</string>
     <string name="invalid">Keterangan, nominal, dan kategori tidak boleh kosong !</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus list</string>
     <string name="kategori_1">Pendapatan</string>
     <string name="kategori_2">Pengeluaran</string>
 </resources>

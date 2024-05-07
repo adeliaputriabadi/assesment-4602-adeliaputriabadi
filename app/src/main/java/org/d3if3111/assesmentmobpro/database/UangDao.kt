@@ -21,4 +21,7 @@ interface UangDao {
 
     @Query("SELECT * FROM uang WHERE id = :id")
     suspend fun getUangById(id: Long): Uang?
+
+    @Query("DELETE FROM uang WHERE id = :id")
+    suspend fun deletedById(id: Long)
 }
