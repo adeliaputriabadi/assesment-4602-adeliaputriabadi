@@ -3,12 +3,15 @@ package org.d3if3111.assesmentmobpro.ui.screen
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -71,8 +74,8 @@ fun MainScreen(navController: NavHostController) {
                     Text(text = stringResource(id = R.string.app_name))
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = Color(0xFF58A399),
+                    titleContentColor = Color(0xFFFFFFFF)
                 ),
                 actions = {
                     IconButton(onClick = {
@@ -90,7 +93,7 @@ fun MainScreen(navController: NavHostController) {
                                if (showList) R.string.grid
                                else R.string.list
                            ),
-                           tint = MaterialTheme.colorScheme.primary
+                           tint = Color(0xFFFFFFFF)
                            )
                     }
                 }
@@ -100,12 +103,14 @@ fun MainScreen(navController: NavHostController) {
             FloatingActionButton(
                 onClick = {
                     navController.navigate(Screen.FormBaru.route)
-                }
+                },
+                containerColor =Color(0xFF58A399)
+
             ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = stringResource(id = R.string.tambah_list),
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = Color(0xFFFFFFFF)
                 )
             }
         }
@@ -132,6 +137,11 @@ fun ScreenContent(showList: Boolean, modifier: Modifier, navController: NavHostC
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
+            Image(
+                painter = painterResource(id = R.drawable.kosong), 
+                contentDescription = stringResource(id = R.string.gambar_kosong),
+                )
+            Spacer(modifier = Modifier.height(16.dp))
             Text(text = stringResource(id = R.string.list_kosong))
         }
     }

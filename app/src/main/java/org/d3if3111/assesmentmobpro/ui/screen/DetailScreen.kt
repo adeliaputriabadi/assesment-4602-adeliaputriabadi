@@ -86,7 +86,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                                      Icon(
                                          imageVector = Icons.Filled.ArrowBack,
                                          contentDescription = stringResource(id = R.string.kembali),
-                                         tint = MaterialTheme.colorScheme.primary
+                                         tint = Color(0xFFFFFFFF)
                                          )
                                  }
                 },
@@ -97,8 +97,8 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         Text(text = stringResource(id = R.string.edit))
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = Color(0xFF58A399),
+                    titleContentColor = Color(0xFFFFFFFF)
                 ),
                 actions = {
                     IconButton(onClick = {
@@ -116,7 +116,7 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                         Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = stringResource(id = R.string.simpan),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color(0xFFFFFFFF)
                             )
 
                     }
@@ -157,7 +157,7 @@ fun DeleteAction(delete: () -> Unit) {
         Icon(
             imageVector = Icons.Filled.MoreVert,
             contentDescription = stringResource(id = R.string.lainnya),
-            tint = MaterialTheme.colorScheme.primary
+            tint = Color(0xFFFFFFFF)
         )
         DropdownMenu(
             expanded = expanded ,
