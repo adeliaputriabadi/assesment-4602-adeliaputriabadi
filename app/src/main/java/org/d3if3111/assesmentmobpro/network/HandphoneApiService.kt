@@ -27,4 +27,8 @@ object HandphoneApi {
     val service: HandphoneApiService by lazy {
         retrofit.create(HandphoneApiService::class.java)
     }
+
+    fun getHandphoneUrl(imageId: String): String {
+        return "$BASE_URL$imageId.jpg"
+    }
 }
