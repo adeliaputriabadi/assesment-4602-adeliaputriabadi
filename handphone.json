@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Dyna Rosalina",
+        "type": "Samsung",
+        "imageId": "dyna"
+    },
+    {
+        "name": "Adelia Putri Abadi",
+        "type": "Iphone",
+        "imageId": "adelia"
+    },
+    {
+        "name": "Feby Irmayana",
+        "type": "Samsung",
+        "imageId": "feby"
+    },
+    {
+        "name": "Mariana",
+        "type": "Vivo",
+        "imageId": "mariana"
+    },
+    {
+        "name": "Syfanadya Wening Adi",
+        "type": "Realme",
+        "imageId": "syfa"
+    },
+    {
+        "name": "Chaeza Fauzyah Inayah",
+        "type": "Samsung",
+        "imageId": "chae"
+    }
+]
