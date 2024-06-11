@@ -20,14 +20,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -110,13 +114,16 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val context = LocalContext.current
     val dataStore = UserDataStore(context)
-    val user by dataStore.userFlow.collectAsState(User())
+    val user by dataStore.userFlow.collectAsState(initial = User())
 
     val viewModel: MainViewModel = viewModel()
     val errorMessage by viewModel.errorMessage
 
     var showDialog by remember { mutableStateOf(false) }
     var showHandphoneDialog by remember { mutableStateOf(false) }
+    var showHapusDialog by remember { mutableStateOf(false) }
+
+    var idHandphoneToDelete by remember { mutableStateOf<String?>(null) }
 
     var bitmap: Bitmap? by remember { mutableStateOf(null) }
     val launcher = rememberLauncherForActivityResult(CropImageContract()) {
@@ -173,7 +180,16 @@ fun MainScreen() {
         }
 
     ) { padding ->
-        ScreenContent(viewModel,user.email, Modifier.padding(padding))
+        ScreenContent(
+            viewModel,
+            user.email,
+            Modifier.padding(padding),
+            onDeleteRequest = {id ->
+                idHandphoneToDelete = id
+                showHapusDialog = true
+            }
+
+        )
 
         if (showDialog) {
             ProfilDialog(
@@ -194,6 +210,18 @@ fun MainScreen() {
             }
 
         }
+        if (showHapusDialog && idHandphoneToDelete!= null) {
+            HapusDialog(
+                userId = user.email,
+                id = idHandphoneToDelete!!,
+                onDismissRequest = { showHapusDialog = false },
+                onConfirmation = {userId, id ->
+                    viewModel.deleteData(userId,id)
+                    showHapusDialog = false
+                }
+            )
+        }
+
 
         if (errorMessage != null) {
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
@@ -203,7 +231,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun ScreenContent(viewModel: MainViewModel, userId: String, modifier: Modifier) {
+fun ScreenContent(viewModel: MainViewModel, userId: String, modifier: Modifier, onDeleteRequest: (String) -> Unit) {
 
     val data by viewModel.data
     val status by viewModel.status.collectAsState()
@@ -229,7 +257,7 @@ fun ScreenContent(viewModel: MainViewModel, userId: String, modifier: Modifier) 
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(bottom = 80.dp)
             ) {
-                items(data) { ListItem(handphone = it)}
+                items(data) { ListItem(handphone = it, onDeleteRequest )}
             }
         }
         ApiStatus.FAILED -> {
@@ -249,6 +277,72 @@ fun ScreenContent(viewModel: MainViewModel, userId: String, modifier: Modifier) 
                     Text(text = stringResource(id = R.string.try_again))
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun ListItem(handphone: Handphone, onDeleteRequest: (String) -> Unit) {
+    Box (
+        modifier = Modifier
+            .padding(4.dp)
+            .border(1.dp, Color.Gray),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(HandphoneApi.getHandphoneUrl(handphone.imageId))
+                .crossfade(true)
+                .build(),
+            contentDescription = stringResource(id = R.string.gambar,handphone.name),
+            contentScale = ContentScale.Crop,
+            placeholder = painterResource(id = R.drawable.loading_img),
+            error = painterResource(id = R.drawable.baseline_broken_image_24),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+        )
+
+        Row {
+        Column (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+                .background(Color(red = 0f, green = 0f, blue = 0f, alpha = 0.5f))
+                .padding(4.dp)
+        ) {
+            Row {
+                Column (
+                    Modifier.width(100.dp)
+                ){
+                    Text(
+                        text = handphone.name,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                    Text(
+                        text = handphone.type,
+                        fontStyle = FontStyle.Italic,
+                        fontSize = 14.sp,
+                        color = Color.White
+
+                    )
+                }
+                Spacer(modifier = Modifier.width(80.dp))
+                    IconButton(onClick = { onDeleteRequest(handphone.id) }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = stringResource(id = R.string.hapus),
+                            tint = Color.White
+                        )
+                    }
+
+
+
+            }
+
+
+        }
         }
     }
 }
@@ -275,10 +369,11 @@ private suspend fun signIn(context: Context,dataStore: UserDataStore) {
 private suspend fun signOut(context: Context,dataStore: UserDataStore) {
     try {
         val credentialManager = CredentialManager.create(context)
-        credentialManager.clearCredentialState(
-            ClearCredentialStateRequest()
-        )
+        val request= ClearCredentialStateRequest()
+        credentialManager.clearCredentialState(request)
         dataStore.saveData(User())
+
+
     } catch (e: ClearCredentialException) {
         Log.e("SIGN-IN", "Error: ${e.errorMessage}")
     }
@@ -321,54 +416,11 @@ private suspend fun handleSignIn(
         }
     }
     else {
-        Log.e("SIGN-IN", "Error: unrecognized custom credential type.")
+        Log.e("SIGN-IN", "Error: credential tidak dikenali.")
     }
 }
 
-@Composable
-fun ListItem(handphone: Handphone) {
-    Box (
-        modifier = Modifier
-            .padding(4.dp)
-            .border(1.dp, Color.Gray),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(HandphoneApi.getHandphoneUrl(handphone.imageId))
-                .crossfade(true)
-                .build(),
-            contentDescription = stringResource(id = R.string.gambar,handphone.name),
-            contentScale = ContentScale.Crop,
-            placeholder = painterResource(id = R.drawable.loading_img),
-            error = painterResource(id = R.drawable.baseline_broken_image_24),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-        )
-        Column (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-                .background(Color(red = 0f, green = 0f, blue = 0f, alpha = 0.5f))
-                .padding(4.dp)
-        ) {
-            Text(
-                text = handphone.name,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
-            Text(
-                text = handphone.type,
-                fontStyle = FontStyle.Italic,
-                fontSize = 14.sp,
-                color = Color.White
 
-            )
-            
-        }
-    }
-}
 
 
 

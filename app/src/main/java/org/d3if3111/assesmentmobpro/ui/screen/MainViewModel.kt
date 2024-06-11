@@ -33,7 +33,7 @@ class MainViewModel : ViewModel() {
                 data.value = HandphoneApi.service.getHandphone(userId)
                 status.value = ApiStatus.SUCCESS
             } catch (e: Exception) {
-                Log.d("MainViewModel", "Failure: ${e.message}")
+                Log.d("MainViewModel", "Failed: ${e.message}")
                 status.value = ApiStatus.FAILED
             }
         }
@@ -53,6 +53,23 @@ class MainViewModel : ViewModel() {
                     retrieveData(userId)
                 else
                     throw Exception(result.message)
+            } catch (e: Exception) {
+                Log.d("MainViewModel", "Failure: ${e.message}")
+                errorMessage.value = "Error: ${e.message}"
+            }
+        }
+    }
+
+    fun deleteData(userId: String, id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = HandphoneApi.service
+                    .deleteHandphone(userId, id)
+                if (response.status == "success") {
+                    retrieveData(userId)
+                } else {
+                    throw Exception(response.message)
+                }
             } catch (e: Exception) {
                 Log.d("MainViewModel", "Failure: ${e.message}")
                 errorMessage.value = "Error: ${e.message}"

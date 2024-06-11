@@ -8,12 +8,14 @@ import org.d3if3111.assesmentmobpro.model.Handphone
 import org.d3if3111.assesmentmobpro.model.OpStatus
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.DELETE
 
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://unspoken.my.id/"
 
@@ -38,6 +40,12 @@ interface HandphoneApiService {
         @Part("name") name: RequestBody,
         @Part("type") type: RequestBody,
         @Part image: MultipartBody.Part
+    ): OpStatus
+
+    @DELETE("api_adel.php")
+    suspend fun deleteHandphone(
+        @Header("Authorization") userId: String,
+        @Query("id") id: String
     ): OpStatus
 
 }
