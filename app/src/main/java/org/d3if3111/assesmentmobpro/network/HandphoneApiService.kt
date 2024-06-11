@@ -7,8 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 import retrofit2.http.GET
+import retrofit2.http.Header
 
-private const val BASE_URL = "https://raw.githubusercontent.com/adeliaputriabadi/assesment-4602-adeliaputriabadi/static-api/"
+private const val BASE_URL = "https://unspoken.my.id/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -19,7 +20,7 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 interface HandphoneApiService {
-    @GET("handphone.json")
+    @GET("api_adel.php")
     suspend fun getHandphone(): List<Handphone>
 }
 
@@ -29,7 +30,7 @@ object HandphoneApi {
     }
 
     fun getHandphoneUrl(imageId: String): String {
-        return "$BASE_URL$imageId.jpg"
+        return "${BASE_URL}image.php?id=$imageId"
     }
 
 
