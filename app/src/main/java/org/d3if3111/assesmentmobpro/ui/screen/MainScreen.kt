@@ -111,10 +111,12 @@ fun MainScreen() {
     val user by dataStore.userFlow.collectAsState(User())
 
     var showDialog by remember { mutableStateOf(false) }
+    var showHandphoneDialog by remember { mutableStateOf(false) }
 
     var bitmap: Bitmap? by remember { mutableStateOf(null) }
     val launcher = rememberLauncherForActivityResult(CropImageContract()) {
         bitmap = getCroppedImage(context.contentResolver, it)
+        if (bitmap !=null) showHandphoneDialog = true
     }
 
     Scaffold(
@@ -176,6 +178,16 @@ fun MainScreen() {
                 showDialog = false
 
             }
+        }
+
+        if (showHandphoneDialog) {
+            HandphoneDialog(
+                bitmap = bitmap,
+                onDismissRequest = { showHandphoneDialog = false }) {name, type ->
+                   Log.d("TAMBAH", "$name $type ditambahkan.")
+                    showHandphoneDialog = false
+            }
+
         }
     }
 }
