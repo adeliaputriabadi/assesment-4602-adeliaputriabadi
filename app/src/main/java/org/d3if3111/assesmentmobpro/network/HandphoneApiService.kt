@@ -27,7 +27,9 @@ private val retrofit = Retrofit.Builder()
     .build()
 interface HandphoneApiService {
     @GET("api_adel.php")
-    suspend fun getHandphone(): List<Handphone>
+    suspend fun getHandphone(
+        @Header("Authorization") userId: String
+    ): List<Handphone>
 
     @Multipart
     @POST("api_adel.php")
