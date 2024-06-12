@@ -313,7 +313,7 @@ fun ListItem(handphone: Handphone, onDeleteRequest: (String) -> Unit) {
         ) {
             Row {
                 Column (
-                    Modifier.width(40.dp)
+                    Modifier.width(100.dp)
                 ){
                     Text(
                         text = handphone.name,
@@ -328,7 +328,7 @@ fun ListItem(handphone: Handphone, onDeleteRequest: (String) -> Unit) {
 
                     )
                 }
-                Spacer(modifier = Modifier.width(80.dp))
+                Spacer(modifier = Modifier.width(20.dp))
                     IconButton(onClick = { onDeleteRequest(handphone.id) }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
