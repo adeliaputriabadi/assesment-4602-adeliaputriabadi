@@ -164,7 +164,7 @@ fun MainScreen() {
             FloatingActionButton(onClick = {
                 val options = CropImageContractOptions(
                     null, CropImageOptions(
-                        imageSourceIncludeGallery = false,
+                        imageSourceIncludeGallery = true,
                         imageSourceIncludeCamera = true,
                         fixAspectRatio = true
                     )
