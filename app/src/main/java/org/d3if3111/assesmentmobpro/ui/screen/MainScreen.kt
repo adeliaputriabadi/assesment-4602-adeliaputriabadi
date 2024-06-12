@@ -313,7 +313,7 @@ fun ListItem(handphone: Handphone, onDeleteRequest: (String) -> Unit) {
         ) {
             Row {
                 Column (
-                    Modifier.width(100.dp)
+                    Modifier.width(40.dp)
                 ){
                     Text(
                         text = handphone.name,
